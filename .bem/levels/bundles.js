@@ -21,7 +21,17 @@ exports.getTechs = function() {
         'ie9.css'       : 'v2/ie9.css',
 
         'bemhtml'       : join(BEMBL_TECHS, 'v2/bemhtml.js'),
-        'html'          : join(BEMBL_TECHS, 'html.js')
+        'html'          : join(BEMBL_TECHS, 'html.js'),
+
+        'i18n'            : join(BEMBL_TECHS, 'v2/i18n.js'),
+        'i18n.js'         : join(BEMBL_TECHS, 'v2/i18n.js.js'),
+        'i18n.html'       : join(BEMBL_TECHS, 'v2/i18n.html.js'),
+        'i18n.js+bemhtml' : join(BEMBL_TECHS, 'v2/i18n.js+bemhtml.js'),
+
+        'stas.js'                 : join(PRJ_TECHS, 'v2/stas.js.js'),
+        'stas.html'               : join(PRJ_TECHS, 'v2/stas.html.js'),
+        'i18n.stas.js'            : join(PRJ_TECHS, 'v2/i18n.stas.js.js'),
+        'i18n.stas.html'          : join(PRJ_TECHS, 'v2/i18n.stas.html.js')
     };
 
 };

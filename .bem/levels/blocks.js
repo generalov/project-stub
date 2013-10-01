@@ -18,6 +18,8 @@ exports.getTechs = function() {
         'ie9.css'       : 'ie9.css',
 
         'bemhtml'       : join(BEMBL_TECHS, 'bemhtml.js'),
+
+        'stas.js'       : join(PRJ_TECHS, 'v2/stas.js.js'),
     };
 
 };

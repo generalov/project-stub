@@ -10,6 +10,9 @@
     "node": "0.6 | 0.8 | 0.10"
   },
   "dependencies": {
+    "borschik" : "*",
+    "dom-js" : "*",
+    "bower" : "*",
     "bem" : "~0.6.4",
     "bem-environ" : "~1.0.1"
   },
