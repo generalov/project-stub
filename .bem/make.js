@@ -51,6 +51,10 @@ MAKE.decl('BundleNode', {
 
     },
 
+    'create-bemdecl.js-node': function(tech, bundleNode, magicNode) {
+        return this.setFileNode.apply(this, arguments);
+    },
+
     'create-i18n.js-optimizer-node': function(tech, sourceNode, bundleNode) {
 
         return this['create-js-optimizer-node'].apply(this, arguments);
