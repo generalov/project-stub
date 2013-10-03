@@ -1,0 +1,14 @@
+{
+    // Details: https://github.com/victorporof/Sublime-JSHint#using-your-own-jshintrc-options
+    // Example: https://github.com/jshint/jshint/blob/master/examples/.jshintrc
+    // Documentation: http://www.jshint.com/docs/
+    "browser": true,
+    "globalstrict": true,
+    "quotmark": true,
+    "jquery": true,
+    "predef": [ "BEM", "BEM.DOM" ],
+    "sub": true,
+    "trailing": true,
+    "undef": true,
+    "unused": true
+}

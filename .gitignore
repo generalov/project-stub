@@ -5,6 +5,9 @@ node_modules/
 .project
 .svn
 .bem/cache/
+.bem/configs/current
 *.bundles/*/*.*
 !*.bundles/*/*.bemdecl.js
 !*.bundles/.bem/*
+i/
+build/
