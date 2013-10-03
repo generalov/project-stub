@@ -10,7 +10,7 @@ exports.getTechs = function() {
 
     return {
         'bemjson.js'    : join(PRJ_TECHS, 'bemjson.js'),
-        'bemdecl.js'    : 'v2/bemdecl.js',
+        'bemdecl.js'    : join(PRJ_TECHS, 'v2/bemdecl.js'),
         'deps.js'       : 'v2/deps.js',
         'js'            : 'v2/js-i',
         'css'           : 'v2/css',
@@ -37,6 +37,6 @@ exports.getTechs = function() {
 };
 
 
-// Create bundles in bemjson.js tech
-exports.defaultTechs = ['bemjson.js'];
+// Create bundles in bemdecl.js tech
+exports.defaultTechs = ['bemdecl.js'];
 
