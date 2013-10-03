@@ -72,7 +72,7 @@ dist-html::
 		lang=`basename $$relpath | sed -n 's#^.*\(\...\)\.html#\1#p'`; \
 		outfile=$(DISTDIR)/$$bundle/index$${lang}.html ; \
 		mkdir -p `dirname $$outfile` ; \
-		$(BORSCHIK) -i $$line -t .bem/borschik/techs/html.js --freeze yes | tee $$outfile > /dev/null; \
+		$(BORSCHIK) -i $$line -t html --freeze yes | tee $$outfile > /dev/null; \
 	done
 
 dist-static::
