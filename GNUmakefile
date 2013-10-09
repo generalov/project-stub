@@ -52,20 +52,20 @@ clean:: $(BEM)
 .PHONY: pmake pbuild dist-css dist-js dist-html dist-static
 
 
-pmake: $(BEM) clean use-production
+pmake: $(BEM) use-production
 	$(PRODENV) $(BEM) make
 
-dist-css::
+dist-css:: pmake
 	find $(BUNDLE) -name '_*.css' | while read line; do \
 		$(BORSCHIK) -i $$line -t css --freeze yes > /dev/null; \
 	done
 
-dist-js::
+dist-js:: pmake
 	find $(BUNDLE) -name '_*.js' -a -not \( -name '_*.*.js' \) -o -name '_*.??.js' | while read line; do \
 		$(BORSCHIK) -i $$line -t js --freeze yes > /dev/null; \
 	done
 
-dist-html::
+dist-html:: pmake
 	find $(BUNDLE) -name '*.html' -o -name '*.??.html' | while read line; do \
 		relpath=`echo $$line | sed 's#^$(CURDIR)##'`; \
 		bundle=`dirname $$relpath`; \
@@ -75,19 +75,22 @@ dist-html::
 		$(BORSCHIK) -i $$line -t html --freeze yes | tee $$outfile > /dev/null; \
 	done
 
-dist-static::
+dist-static:: pmake $(DISTDIR) dist-css dist-js dist-html
 	( echo $(FREEZE_PATH); echo robots.txt; echo favicon.ico; ) \
 		| tar -cT - | tar -C $(DISTDIR) -xvf-
 
+$(DISTDIR)::
+	mkdir -p $(DISTDIR)
+
 .PHONY: use-development use-production dev release dist
 
-use-development::
+use-development:: clean
 	ln -snf development .bem/configs/current
 
-use-production::
+use-production:: clean
 	ln -snf production .bem/configs/current
 
-pbuild: pmake dist-css dist-js dist-html dist-static
+pbuild: dist-static
 
 $(DIST): pbuild
 	tar -C $(BUILD_ROOT) -cf $(DIST) $(PROJECT_NAME)
