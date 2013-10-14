@@ -4,15 +4,14 @@ module.exports = function(config) {
 
     config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
         nodeConfig.addTechs([
-            [ require('enb/techs/levels'), { levels: getLevels(config) } ],
             [ require('enb/techs/file-provider'), { target: '?.bemjson.js' } ],
+            require('enb/techs/bemdecl-from-bemjson'),
+            [ require('enb/techs/levels'), { levels: getLevels(config) } ],
             require('enb/techs/deps-old'),
             require("enb/techs/files"),
-            require('enb/techs/bemdecl-from-bemjson'),
-            require('enb-modules/techs/deps-with-modules'),
+            // require('enb-modules/techs/deps-with-modules'),
             [ require('enb/techs/browser-js'), {target:'?.pre.js'}],
             [ require('enb-modules/techs/prepend-modules'), {source: '?.pre.js'}],
-            require('enb/techs/files'),
             require('./techs/css-stylus-with-nib-axis'),
             // require('enb/techs/js'),
             // require('enb/techs/css'),
