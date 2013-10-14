@@ -5,5 +5,5 @@ node_modules
 .svn
 .bem/tmp
 .bem/lib
-desktop.bundles/*/*.*
-!desktop.bundles/*/*.bemjson.js
+*.bundles/*/*.*
+!*.bundles/*/*.bemjson.js
