@@ -4,25 +4,26 @@ module.exports = function(config) {
 
     config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
         nodeConfig.addTechs([
-            new (require('enb/techs/file-provider'))({ target: '?.bemjson.js' }),
-            new (require('enb/techs/bemdecl-from-bemjson'))(),
-            new (require('enb/techs/levels'))({ levels: getLevels(config) }),
-            new (require('enb-modules/techs/deps-with-modules'))(),
-            // new (require('enb/techs/deps-old'))(),
-            new (require('enb/techs/browser-js'))({target:'?.pre.js'}),
-            new (require('enb-modules/techs/prepend-modules'))({source: '?.pre.js'}),
-            new (require('enb/techs/files'))(),
-            new (require('./techs/css-stylus-with-nib-axis'))(),
-            // new (require('enb/techs/js'))(),
-            // new (require('enb/techs/css'))(),
-            // new (require('enb/techs/css-ie'))(),
-            // new (require('enb/techs/css-ie6'))(),
-            // new (require('enb/techs/css-ie7'))(),
-            // new (require('enb/techs/css-ie8'))(),
-            // new (require('enb/techs/css-ie9'))(),
-            new (require('enb-bemxjst/techs/bemhtml'))(),
-            //new (require('enb-bemxjst/techs/bemtree'))(),
-            new (require('enb/techs/html-from-bemjson'))()
+            [ require('enb/techs/levels'), { levels: getLevels(config) } ],
+            [ require('enb/techs/file-provider'), { target: '?.bemjson.js' } ],
+            require('enb/techs/deps-old'),
+            require("enb/techs/files"),
+            require('enb/techs/bemdecl-from-bemjson'),
+            require('enb-modules/techs/deps-with-modules'),
+            [ require('enb/techs/browser-js'), {target:'?.pre.js'}],
+            [ require('enb-modules/techs/prepend-modules'), {source: '?.pre.js'}],
+            require('enb/techs/files'),
+            require('./techs/css-stylus-with-nib-axis'),
+            // require('enb/techs/js'),
+            // require('enb/techs/css'),
+            // require('enb/techs/css-ie'),
+            // require('enb/techs/css-ie6'),
+            // require('enb/techs/css-ie7'),
+            // require('enb/techs/css-ie8'),
+            // require('enb/techs/css-ie9'),
+            require('enb-bemxjst/techs/bemhtml'),
+            //require('enb-bemxjst/techs/bemtree'),
+            require('enb/techs/html-from-bemjson'),
         ]);
 
         nodeConfig.addTargets([
@@ -46,13 +47,13 @@ module.exports = function(config) {
     config.mode('development', function() {
         config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
             nodeConfig.addTechs([
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.js', destTarget: '_?.js' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.css', destTarget: '_?.css' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.ie.css', destTarget: '_?.ie.css' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' }),
-                new (require('enb/techs/file-copy'))({ sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' })
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.js', destTarget: '_?.js' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.css', destTarget: '_?.css' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.ie.css', destTarget: '_?.ie.css' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' } ],
+                [ require('enb/techs/file-copy'), { sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' } ],
             ]);
         });
     });
@@ -60,13 +61,13 @@ module.exports = function(config) {
     config.mode('production', function() {
         config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
             nodeConfig.addTechs([
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.js', destTarget: '_?.js' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.css', destTarget: '_?.css' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.ie.css', destTarget: '_?.ie.css' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' }),
-                new (require('enb/techs/borschik'))({ sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' })
+                [ require('enb/techs/borschik'), { sourceTarget: '?.js', destTarget: '_?.js' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.css', destTarget: '_?.css' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.ie.css', destTarget: '_?.ie.css' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' } ],
+                [ require('enb/techs/borschik'), { sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' } ],
             ]);
         });
     });
