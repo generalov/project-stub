@@ -1,40 +1,6 @@
 module.exports = function(config) {
-    config.node('desktop.bundles/index');
 
-    config.loadModule = function(name) {
-        var path = this.getRootPath() + '/node_modules/' + name;
-        this.includeConfig(path);
-        return this;
-    };
-    config.loadModule('enb-checkout');
-
-    config.module('enb-checkout', function(config) {
-        config.addLibraries({
-            '.bem/lib/bem-core' : {
-                type: 'git',
-                url: 'git://github.com/bem/bem-core.git',
-                treeish: 'v1'
-            },
-            // '.bem/lib/bem-json' : {
-            //     type: 'git',
-            //     url: 'git://github.com/delfrrr/bem-json.git'
-            // },
-            // '.bem/lib/bemhtml' : {
-            //     type: 'git',
-            //     url: 'git://github.com/bem/bemhtml.git'
-            // },
-            '.bem/lib/bem-components-v1' : {
-                type: 'git',
-                url: 'git://github.com/bem/bem-components.git',
-                treeish: 'v1'
-            },
-            // '.bem/lib/bem-components-v2' : {
-            //     type: 'git',
-            //     url: 'git://github.com/bem/bem-components.git',
-            //     treeish: 'v2'
-            // }
-        })
-    });
+    config.nodes('desktop.bundles/*');
 
     config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
         nodeConfig.addTechs([
@@ -58,9 +24,23 @@ module.exports = function(config) {
             //new (require('enb-bemxjst/techs/bemtree'))(),
             new (require('enb/techs/html-from-bemjson'))()
         ]);
+
         nodeConfig.addTargets([
-            '?.html', '_?.js', '_?.css'
+            '?.html',
+            '_?.js',
+            '_?.css'
         ]);
+
+        function getLevels(config) {
+          return [
+            {path: '.bem/lib/bem-core/common.blocks', check: false},
+            //{path: '.bem/lib/bem-core/desktop.blocks', check: false},
+            //{path: '.bem/lib/bemhtml/common.blocks', check: false},
+            //'common.blocks',
+            //'desktop.blocks'
+          ].map(function(levelPath) { return config.resolvePath(levelPath); });
+        }
+
     });
 
     config.mode('development', function() {
@@ -76,6 +56,7 @@ module.exports = function(config) {
             ]);
         });
     });
+
     config.mode('production', function() {
         config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
             nodeConfig.addTechs([
@@ -90,17 +71,39 @@ module.exports = function(config) {
         });
     });
 
+    config.includeConfig('enb-checkout');
+
+    config.module('enb-checkout', function(config) {
+        config.addLibraries({
+            '.bem/lib/bem-core' : {
+                type: 'git',
+                url: 'git://github.com/bem/bem-core.git',
+                treeish: 'v1'
+            },
+            '.bem/lib/bem-components-v1' : {
+                type: 'git',
+                url: 'git://github.com/bem/bem-components.git',
+                treeish: 'v1'
+            },
+            // '.bem/lib/bem-components-v2' : {
+            //     type: 'git',
+            //     url: 'git://github.com/bem/bem-components.git',
+            //     treeish: 'v2'
+            // },
+            // '.bem/lib/bem-json' : {
+            //     type: 'git',
+            //     url: 'git://github.com/delfrrr/bem-json.git'
+            // },
+            // '.bem/lib/bemhtml' : {
+            //     type: 'git',
+            //     url: 'git://github.com/bem/bemhtml.git'
+            // },
+        });
+
+    });
+
     config.task("libraries.get", function(task) {
         return config.module('enb-checkout').checkoutLibraries(task);
     });
 };
 
-function getLevels(config) {
-  return [
-    {path: '.bem/lib/bem-core/common.blocks', check: false},
-    //{path: '.bem/lib/bem-core/desktop.blocks', check: false},
-    //{path: '.bem/lib/bemhtml/common.blocks', check: false},
-    //'common.blocks',
-    //'desktop.blocks'
-  ].map(function(levelPath) { return config.resolvePath(levelPath); });
-}
