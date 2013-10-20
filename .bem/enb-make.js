@@ -60,13 +60,17 @@ module.exports = function(config) {
     config.mode('production', function() {
         config.nodeMask(/desktop\.bundles\/.*/, function(nodeConfig) {
             nodeConfig.addTechs([
-                [ require('enb/techs/borschik'), { sourceTarget: '?.js', destTarget: '_?.js' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.css', destTarget: '_?.css' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.ie.css', destTarget: '_?.ie.css' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.js', destTarget: '_?.js' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.css', destTarget: '_?.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.ie.css', destTarget: '_?.ie.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.ie6.css', destTarget: '_?.ie6.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.ie7.css', destTarget: '_?.ie7.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.ie8.css', destTarget: '_?.ie8.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.ie9.css', destTarget: '_?.ie9.css' } ],
+                [ require('enb/techs/borschik'), { freeze: true, minify: true, sourceTarget: '?.html', destTarget: '_?.html' } ],
+            ]);
+            nodeConfig.addTargets([
+                '_?.html',
             ]);
         });
     });

@@ -18,7 +18,10 @@
     "axis-css": ">=0.1.5",
     "enb-checkout": "git://github.com/escaton/enb-checkout.git",
     "enb-watchfs": "git://github.com/escaton/enb-watchfs.git",
-    "bem-bench":"git://github.com/bem/bem-bench.git"
+    "bem-bench":"git://github.com/bem/bem-bench.git",
+    "dom-js" : "*",
+    "bower" : "*",
+    "borschik": "~0.4.0"
   },
   "devDependencies": {},
   "private": true
