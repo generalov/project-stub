@@ -24,7 +24,7 @@ module.exports = function(config) {
 
         function getLevels(config) {
           return [
-            {path: '.bem/lib/bem-core/common.blocks', check: false},
+            {path: 'libs/bem-core/common.blocks', check: false},
             'common.blocks',
           ].map(function(levelPath) { return config.resolvePath(levelPath); });
         }
@@ -57,7 +57,7 @@ module.exports = function(config) {
 
     config.module('enb-checkout', function(config) {
         config.addLibraries({
-            '.bem/lib/bem-core' : {
+            'libs/bem-core' : {
                 type: 'git',
                 url: 'git://github.com/bem/bem-core.git',
                 treeish: 'v1'
