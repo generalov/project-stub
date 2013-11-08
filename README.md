@@ -2,13 +2,10 @@
 
 This repository contains the *minimal* configuration-files and folders you will need to create a [BEM](http://bem.info) project from *scratch*.
 
----
 
 ## Installation Requirements:
 
 - [node.js](http://nodejs.org/)
-
-You may also consider [installing bem-tools locally to your environment](http://bem.info/tools/bem/installation/) for [ease of use](#an-easier-more-beautiful-way), though it is **not required**
 
 ---
 
@@ -17,17 +14,13 @@ You may also consider [installing bem-tools locally to your environment](http://
 So, how easy is it to get started with BEM?  *Super easy*.
 
     It's as easy as...
-    
+
     1 › git clone git://github.com/mdevils/project-stub.git
-    2 › cd project-stub
-    3 › npm install
-    4 › git submodule init
-    5 › git submodule update
-    6 › make
+    2 › make server
 
     (hint: execute the above commands in your terminal)
 
-Now that `bem server` is running, check it out:
+Now that `enb server` is running, check it out:
 
 ````
 Navigate to: http://localhost:8080/desktop.bundles/index/index.html
@@ -37,7 +30,21 @@ Navigate to: http://localhost:8080/desktop.bundles/index/index.html
 
 ---
 
-**That's it, it's that simple. Congratulations, your BEM project is already underway!**
+## Сборка дистрибутива для статического сайта:
+
+    make dist
+
+Cобирает статический сайт в архив build/www.tar
+
+
+### Заморозка в деталях:
+
+Для примера в проекте настроена сборка `priv.js` с заморозкой статических урлов средствами [borschik](http://ru.bem.info/articles/borschik/).
+
+    make use-production
+    YENV=production ./node_modules/.bin/enb make -n desktop.bundles/common/_common.priv.js
+
+Статика (css,js,картинки-иконки) падают в директорию `static/i` (см. configs/production/borschik).
 
 ---
 
@@ -45,18 +52,18 @@ Navigate to: http://localhost:8080/desktop.bundles/index/index.html
 
 Here's the replay... that `make` command will:
 
-1. Install a **local copy** of all required dependencies from [npm](http://npmjs.org/) into the `./node_modules` directory. (specifically: [bem-tools](http://github.com/bem/bem-tools))
-2. Start a local `bem server` on port `8080`.
+1. Install a **local copy** of all required dependencies from [npm](http://npmjs.org/) into the `./node_modules` directory. (specifically: [bem-core](http://github.com/bem/bem-core))
+2. Start a local `enb server` on port `8080`.
 
 #### Note:
 
 What do we mean by "a **local copy** of all required dependencies"?
 
-Well, when you run the `make` command for the first time, we install all of the required dependencies ([bem-tools](http://github.com/bem/bem-tools))
+Well, when you run the `make libaries-get` command for the first time, we install all of the required dependencies ([bem-core](http://github.com/bem/bem-core))
 to the `./node_modules` directory within the **local project directory**.  This is *not* the same thing as
-[installing bem-tools locally to your environment](http://bem.info/tools/bem/installation/) - which, if you haven't
+[installing bem-core locally to your environment](http://bem.info/tools/bem/installation/) - which, if you haven't
 done already, we strongly suggest that you do.  This is by far the easiest, quickest way to use
-[bem-tools](http://github.com/bem/bem-tools) in [a more beautiful way](#an-easier-more-beautiful-way).
+[bem-core](http://github.com/bem/bem-core) in [a more beautiful way](#an-easier-more-beautiful-way).
 
 ---
 
@@ -70,17 +77,17 @@ Each subsiquent time you wish to start the server you may simply run the `make` 
 
 Alternatively you may opt to use the following command:
 
-    › ./node_modules/.bin/bem server
+    › ./node_modules/.bin/enb server
 
-This is the ugly way to run the `bem server` command.  If you think it's ugly too and wish for [a better way](#an-easier-more-beautiful-way) keep reading...
+This is the ugly way to run the `enb server` command.  If you think it's ugly too and wish for [a better way](#an-easier-more-beautiful-way) keep reading...
 
 ### An Easier, More Beautiful Way:
 
-Once you have either (a) [fixed your PATH environment variable](#fix-your-path-environment-variable), or (b) 
-[properly installed bem-tools to your local environment](http://bem.info/tools/bem/installation/).
-You may now, more elegantly, start your `bem server` by running:
+Once you have either (a) [fixed your PATH environment variable](#fix-your-path-environment-variable), or (b)
+[properly installed bem-core to your local environment](http://bem.info/tools/bem/installation/).
+You may now, more elegantly, start your `enb server` by running:
 
-    › bem server
+    › enb server
 
 ---
 
@@ -97,7 +104,7 @@ Pressing `[ctrl] + [c]` while the terminal is your active window will stop the s
 ### Fix your PATH environment variable:
 
 For a more permanent way to "easily" use the *local-to-this-project's* installation of
-[bem-tools](http://github.com/bem/bem-tools) all you must do is ensure that the **path** to the `bem` executable
+[bem-core](http://github.com/bem/bem-core) all you must do is ensure that the **path** to the `bem` executable
 (`./node_modules/.bin`) is included in your `PATH` environment variable.
 
     > export PATH=./node_modules/.bin:$PATH

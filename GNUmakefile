@@ -1,6 +1,6 @@
 .DEFAULT_GOAL :=
 
-PROJECT_NAME ?= release
+PROJECT_NAME ?= www
 BUILD_ROOT ?= build
 DISTDIR ?= $(BUILD_ROOT)/$(PROJECT_NAME)
 DIST := $(DISTDIR).tar
@@ -12,10 +12,10 @@ NPM := npm
 
 BOWER := $(NODE_MODULES).bin/bower --allow-root
 BOWER_COMPONENTS := $(CURDIR)/libs/bower_components
-BORSCHIK := $(NODE_MODULES).bin/borschik
 BUNDLE := $(CURDIR)/*.bundles
 PRODENV := YENV=production XJST_ENGINE=sort-group
-FREEZE_PATH := i
+STATIC_ROOT := static
+FREEZE_PATH := $(STATIC_ROOT)/i
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
@@ -28,7 +28,7 @@ all:: $(ENB) server
 	$(if $(findstring GNUmakefile,$@),,$(ENB) make $@ $(ENB_FLAGS))
 
 .PHONY: server
-server:: $(ENB) use-development libraries.get
+server:: $(ENB) libraries.get
 	echo "Open http://127.0.0.1:8080/desktop.bundles/index/index.html to see build results."
 	@$(ENB) server
 
@@ -45,16 +45,14 @@ $(BOWER_COMPONENTS)::
 .PHONY: clean
 clean::
 	$(ENB) make clean
-	rm -rf $(DISTDIR)
+	rm -rf $(BUILD_ROOT)
 	rm -rf $(FREEZE_PATH)
-	rm -f $(DIST)
 	ln -snf development configs/current
 
 
-.PHONY: pmake pbuild dist-css dist-js dist-html dist-static
+.PHONY: pmake dist-html dist-static
 
-
-pmake: $(ENB) use-production
+pmake: $(ENB)
 	$(PRODENV) $(ENB) make --no-cache
 
 dist-html:: pmake
@@ -68,23 +66,15 @@ dist-html:: pmake
 	done
 
 dist-static:: pmake $(DISTDIR) dist-html
-	( echo $(FREEZE_PATH); echo favicon.ico; ) \
+	( echo $(STATIC_ROOT); echo favicon.ico; ) \
 		| tar -cT - | tar -C $(DISTDIR) -xvf-
 
 $(DISTDIR)::
 	mkdir -p $(DISTDIR)
 
-.PHONY: use-development use-production dev release dist
+.PHONY: dist
 
-use-development:: clean
-	ln -snf development configs/current
-
-use-production:: clean
-	ln -snf production configs/current
-
-pbuild: dist-static
-
-$(DIST): pbuild
+$(DIST): dist-static
 	tar -C $(BUILD_ROOT) -cf $(DIST) $(PROJECT_NAME)
 
 dist:: $(DIST)

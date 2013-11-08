@@ -11,17 +11,12 @@
   },
   "dependencies": {
     "enb" : ">=0.6.8",
-    "bh": ">=0.1.19",
     "enb-bemxjst": ">=0.1.1",
     "enb-modules": ">=0.0.14",
-    "nib": ">=1.0.1",
-    "axis-css": ">=0.1.5",
     "enb-checkout": "git://github.com/escaton/enb-checkout.git",
     "enb-watchfs": "git://github.com/escaton/enb-watchfs.git",
-    "bem-bench":"git://github.com/bem/bem-bench.git",
-    "dom-js" : "*",
     "bower" : "*",
-    "borschik": "~0.4.0"
+    "vow" : "*"
   },
   "devDependencies": {},
   "private": true
